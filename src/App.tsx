@@ -1,12 +1,9 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Home } from "./view/Home";
+import { Songs } from "./view/Songs";
 
 function App() {
     return (
         <div>
-            <Home />
+            <Songs />
         </div>
     );
 }

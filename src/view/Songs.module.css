@@ -1,0 +1,12 @@
+.container {
+    padding: 1px;
+}
+.song {
+    box-shadow: 0px 2px 11px -2px rosybrown;
+    margin-bottom: 1em;
+    display: flex;
+}
+
+.actions {
+    color: bisque;
+}
