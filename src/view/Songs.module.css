@@ -1,12 +1,26 @@
 .container {
-    padding: 1px;
+    padding: 1em;
+    display: flex;
 }
 .song {
     box-shadow: 0px 2px 11px -2px rosybrown;
     margin-bottom: 1em;
-    display: flex;
+    margin-right: 1em;
+    width: 300px;
+    border-radius: 0.3em;
 }
 
 .actions {
     color: bisque;
+    padding: 1em;
+}
+
+.image {
+    width: 100%;
+}
+.info {
+    padding: 0 1em;
+}
+.info h1 {
+    font-size: 2em;
 }

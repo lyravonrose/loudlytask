@@ -30,7 +30,13 @@ export const Songs: FC = () => {
         <div className={styles.container}>
             {songs.map((song: any) => (
                 <div className={styles.song}>
-                    <div className={styles.info}>name: {song.name}</div>
+                    <img
+                        src={song.cover_image_path || ""}
+                        className={styles.image}
+                    />
+                    <div className={styles.info}>
+                        <h3>{song.name}</h3>
+                    </div>
                     <div className={styles.actions}>
                         {chosenSong === song.id ? (
                             chosenSong === pausedSong ? (
