@@ -1,11 +1,18 @@
 import React, { FC, useEffect, useState } from "react";
-import { fetchSongs } from "../model/song";
+import {
+    fetchSongs,
+    likeSong,
+    pauseSong,
+    playSong,
+    resumeSong,
+} from "../model/song";
 import styles from "./Songs.module.css";
-import { Howl, Howler } from "howler";
 
 export const Songs: FC = () => {
     const [songs, setSongs] = useState([]);
     const [chosenSong, setChosenSong] = useState<null | string>(null);
+    const [pausedSong, setPausedSong] = useState<null | string>(null);
+    const [likedSongs, setLikedSongs] = useState<string[]>([]);
 
     useEffect(() => {
         fetchSongs().then((songs) => setSongs(songs));
@@ -15,11 +22,7 @@ export const Songs: FC = () => {
         setChosenSong(id);
         const song: any = songs.find((song: any) => song.id === id);
         if (song) {
-            const sound = new Howl({
-                src: [song.music_file_path],
-            });
-
-            sound.play();
+            playSong(song.music_file_path);
         }
     };
 
@@ -29,15 +32,44 @@ export const Songs: FC = () => {
                 <div className={styles.song}>
                     <div className={styles.info}>name: {song.name}</div>
                     <div className={styles.actions}>
+                        {chosenSong === song.id ? (
+                            chosenSong === pausedSong ? (
+                                <button
+                                    onClick={() => {
+                                        setPausedSong(null);
+                                        resumeSong();
+                                    }}
+                                >
+                                    RESUME
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={() => {
+                                        setPausedSong(song.id);
+                                        pauseSong();
+                                    }}
+                                >
+                                    PAUSE
+                                </button>
+                            )
+                        ) : (
+                            <button
+                                onClick={() => {
+                                    onPlay(song.id);
+                                }}
+                            >
+                                PLAY
+                            </button>
+                        )}
                         <button
+                            disabled={likedSongs.includes(song.id)}
                             onClick={() => {
-                                onPlay(song.id);
+                                setLikedSongs([...likedSongs, song.id]);
+                                likeSong(song.id);
                             }}
                         >
-                            {" "}
-                            PLAY
+                            LIKE
                         </button>
-                        <button>🥟</button>
                     </div>
                 </div>
             ))}
