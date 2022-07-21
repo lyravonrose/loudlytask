@@ -1,5 +1,12 @@
 import { Howl } from "howler";
 
+export interface Song {
+    id: string;
+    name: string;
+    cover_image_path: string;
+    music_file_path: string;
+}
+
 export const fetchSongs = () => {
     return fetch("https://api-stg.jam-community.com/song/trending")
         .then((response) => response.json())
@@ -29,10 +36,6 @@ export const resumeSong = () => {
 };
 
 export const likeSong = (id: string) => {
-    /*
-         Query params:  Body params: id - id of a song to like
-        Endpoint address:
-    */
     return fetch(
         "https://api-stg.jam-community.com/interact/like?apikey=___agAFTxkmMIWsmN9zOpM_6l2SkZPPy21LGRlxhYD8",
         {

@@ -5,6 +5,7 @@ import {
     pauseSong,
     playSong,
     resumeSong,
+    Song,
 } from "../model/song";
 import styles from "./Songs.module.css";
 
@@ -20,7 +21,7 @@ export const Songs: FC = () => {
 
     const onPlay = (id: string) => {
         setChosenSong(id);
-        const song: any = songs.find((song: any) => song.id === id);
+        const song: any = songs.find((song: Song) => song.id === id);
         if (song) {
             playSong(song.music_file_path);
         }
@@ -28,7 +29,7 @@ export const Songs: FC = () => {
 
     return (
         <div className={styles.container}>
-            {songs.map((song: any) => (
+            {songs.map((song: Song) => (
                 <div className={styles.song}>
                     <img
                         src={song.cover_image_path || ""}
